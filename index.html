@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النظام المتقدم للتحليل النحوي | مقدم من 𝑴/𝑨𝑩𝑫𝑬𝑳𝑯𝑨𝑴𝑬𝑬𝑫</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section, .output-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+        }
+        
+        h1 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 {
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        h3 {
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .category {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category label {
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .category label input {
+            margin-left: 8px;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .result-item {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .token {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .analysis-type {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+        
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+        
+        .detail-box {
+            background: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .special-request {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ddd;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: var(--primary);
+        }
+        
+        /* تنبيهات */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-language"></i>
+                <span>مقدم من 𝑴/𝑨𝑩𝑫𝑬𝑳𝑯𝑨𝑴𝑬𝑬𝑫</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="input-section">
+                <h1><i class="fas fa-language"></i> إستخرجلي </h1>
+                
+                <h2><i class="fas fa-keyboard"></i> أدخل الجملة العربية</h2>
+                <textarea id="arabicText" placeholder="اكتب أو الصق الجملة العربية هنا..."></textarea>
+                
+                <h2><i class="fas fa-filter"></i> اختر العناصر النحوية المطلوبة</h2>
+                <div class="categories">
+                    <!-- فئة الأسماء المشتقة -->
+                    <div class="category">
+                        <h3><i class="fas fa-cube"></i> الأسماء المشتقة</h3>
+                        <label><input type="checkbox" value="اسم الفاعل"> اسم الفاعل</label>
+                        <label><input type="checkbox" value="صيغ المبالغة"> صيغ المبالغة</label>
+                        <label><input type="checkbox" value="اسم المفعول"> اسم المفعول</label>
+                        <label><input type="checkbox" value="اسم التفضيل"> اسم التفضيل</label>
+                        <label><input type="checkbox" value="اسم الزمان والمكان"> اسم الزمان والمكان</label>
+                    </div>
+                    
+                    <!-- فئة المصادر -->
+                    <div class="category">
+                        <h3><i class="fas fa-book"></i> المصادر</h3>
+                        <label><input type="checkbox" value="المصدر الميمي"> المصدر الميمي</label>
+                        <label><input type="checkbox" value="المصادر الصريحة"> المصادر الصريحة</label>
+                        <label><input type="checkbox" value="المصدر الصناعي"> المصدر الصناعي</label>
+                        <label><input type="checkbox" value="المصدر المؤول"> المصدر المؤول</label>
+                        <label><input type="checkbox" value="اسم الهيئة"> اسم الهيئة</label>
+                    </div>
+                    
+                    <!-- فئة الأفعال -->
+                    <div class="category">
+                        <h3><i class="fas fa-bolt"></i> الأفعال</h3>
+                        <label><input type="checkbox" value="نائب الفاعل"> نائب الفاعل</label>
+                        <label><input type="checkbox" value="الفعل المتعدي"> الفعل المتعدي</label>
+                        <label><input type="checkbox" value="نصب الفعل المضارع"> نصب الفعل المضارع</label>
+                        <label><input type="checkbox" value="جزم الفعل المضارع"> جزم الفعل المضارع</label>
+                        <label><input type="checkbox" value="رفع الفعل المضارع"> رفع الفعل المضارع</label>
+                    </div>
+                    
+                    <!-- فئة المفعولات -->
+                    <div class="category">
+                        <h3><i class="fas fa-list"></i> المفعولات</h3>
+                        <label><input type="checkbox" value="المفعول به"> المفعول به</label>
+                        <label><input type="checkbox" value="المفعول المطلق"> المفعول المطلق</label>
+                        <label><input type="checkbox" value="المفعول لأجله"> المفعول لأجله</label>
+                        <label><input type="checkbox" value="النائب من المفعول المطلق"> النائب من المفعول المطلق</label>
+                        <label><input type="checkbox" value="الحال"> الحال</label>
+                    </div>
+                    
+                    <!-- فئة أخرى -->
+                    <div class="category">
+                        <h3><i class="fas fa-shapes"></i> عناصر أخرى</h3>
+                        <label><input type="checkbox" value="الجملة الأسمية"> الجملة الأسمية</label>
+                        <label><input type="checkbox" value="النواسخ"> النواسخ</label>
+                        <label><input type="checkbox" value="لا النافية للجنس"> لا النافية للجنس</label>
+                        <label><input type="checkbox" value="التمييز"> التمييز</label>
+                        <label><input type="checkbox" value="المنادي"> المنادي</label>
+                    </div>
+                    
+                    <!-- فئة أخرى -->
+                    <div class="category">
+                        <h3><i class="fas fa-tags"></i> تصنيفات إضافية</h3>
+                        <label><input type="checkbox" value="الممنوع من الصرف"> الممنوع من الصرف</label>
+                        <label><input type="checkbox" value="النعت الحقيقي"> النعت الحقيقي</label>
+                        <label><input type="checkbox" value="البدل"> البدل</label>
+                        <label><input type="checkbox" value="العطف"> العطف</label>
+                        <label><input type="checkbox" value="أسماء الأفعال"> أسماء الأفعال</label>
+                    </div>
+                    
+                    <!-- فئة أخرى -->
+                    <div class="category">
+                        <h3><i class="fas fa-comment"></i> أساليب بلاغية</h3>
+                        <label><input type="checkbox" value="أسلوب ��لاختصاص"> أسلوب الاختصاص</label>
+                        <label><input type="checkbox" value="الإغراء و الحذير"> الإغراء و الحذير</label>
+                        <label><input type="checkbox" value="أسلوب التعجب"> أسلوب التعجب</label>
+                        <label><input type="checkbox" value="أسلوبا المدح و الذم"> أسلوبا المدح و الذم</label>
+                        <label><input type="checkbox" value="أسلوب الاستثناء"> أسلوب الاستثناء</label>
+                    </div>
+                </div>
+                
+                <div class="special-request">
+                    <h2><i class="fas fa-edit"></i> طلب خاص</h2>
+                    <textarea id="specialRequest" placeholder="اكتب هنا أي عنصر نحوي خاص تريد البحث عنه..."></textarea>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: -0.5rem; margin-bottom: 1rem;">مثال: اكتب "اسم كان" للبحث عن الأسماء التي تلي كان وأخواتها</p>
+                </div>
+                
+                <button id="analyzeBtn">
+                    <i class="fas fa-magic"></i> حلل الجملة
+                </button>
+            </div>
+            
+            <div class="output-section">
+                <h2><i class="fas fa-poll"></i> النتائج</h2>
+                <div id="resultsContainer">
+                    <p style="color: #777;">ستظهر النتائج هنا بعد التحليل...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 النظام المتقدم للتحليل النحوي | تم الإنشاء بواسطه 𝑴/𝑨𝑩𝑫𝑬𝑳𝑯𝑨𝑴𝑬𝑬𝑫</p>
+    </footer>
+
+    <script>
+        document.getElementById('analyzeBtn').addEventListener('click', async () => {
+            const text = document.getElementById('arabicText').value.trim();
+            const specialRequest = document.getElementById('specialRequest').value.trim();
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedTypes = Array.from(checkboxes).map(cb => cb.value);
+            
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            if (!text) {
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle"></i> الرجاء إدخال جملة عربية لتحليلها
+                    </div>
+                `;
+                return;
+            }
+            
+            if (selectedTypes.length === 0 && !specialRequest) {
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle"></i> الرجاء اختيار عنصر نحوي واحد على الأقل أو كتابة طلب خاص
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsContainer.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--secondary);"></i>
+                    <p style="margin-top: 1rem;">جاري تحليل الجملة...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('http://localhost:8000/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        analysis_types: selectedTypes,
+                        special_request: specialRequest
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    let htmlResults = '';
+                    
+                    data.results.forEach(item => {
+                        htmlResults += `
+                            <div class="result-item">
+                                <div class="token">${item.token}</div>
+                                <div>
+                                    <span class="analysis-type">${item.type}</span>
+                                    ${item.details ? `<span>${item.details}</span>` : ''}
+                                </div>
+                                ${item.additional_details ? `
+                                    <div class="details">
+                                        ${item.additional_details.map(detail => `
+                                            <span class="detail-box">${detail}</span>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    });
+                    
+                    resultsContainer.innerHTML = htmlResults;
+                } else {
+                    resultsContainer.innerHTML = `
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle"></i> لا توجد نتائج مطابقة للبحث
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> حدث خطأ أثناء التحليل: ${error.message}
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
