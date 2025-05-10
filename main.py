@@ -4,7 +4,14 @@ from typing import List, Dict, Optional
 from camel_tools.morphology.analyzer import Analyzer
 from camel_tools.disambig.mle import MLEDisambiguator
 import re
+from fastapi.middleware.cors import CORSMiddleware
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # أو ضع رابط GitHub Pages الخاص بك
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app = FastAPI()
 
 # تهيئة أدوات التحليل
